@@ -3,12 +3,16 @@ import ReactDOM from "react-dom";
 import App from "./components/app/app";
 
 const Settings = {
-  ERRORS_COUNT: 3
+  MOVIE_TITLE: `Hatiko`,
+  MOVIE_GENRE: `Drama`,
+  MOVIE_YEAR: `2014`
 };
 
 ReactDOM.render(
     <App
-      errorsCount={Settings.ERRORS_COUNT}
+      movieTitle={Settings.MOVIE_TITLE}
+      movieGenre={Settings.MOVIE_GENRE}
+      movieYear={Settings.MOVIE_YEAR}
     />,
     document.querySelector(`#root`)
 );
