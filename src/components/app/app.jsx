@@ -1,6 +1,7 @@
 import React from "react";
 import MainScreen from "../main-screen/main-screen";
 import PropTypes from "prop-types";
+import {Switch, Route, BrowserRouter} from "react-router-dom";
 
 
 const App = (props) => {
@@ -8,9 +9,15 @@ const App = (props) => {
   const {movieTitle, movieGenre, movieYear} = props;
 
   return (
-    <MainScreen movieTitle={movieTitle}
-      movieGenre={movieGenre}
-      movieYear={movieYear}/>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <MainScreen movieTitle={movieTitle}
+            movieGenre={movieGenre}
+            movieYear={movieYear}/>
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 };
 
