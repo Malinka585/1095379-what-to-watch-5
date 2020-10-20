@@ -11,40 +11,52 @@ import PropTypes from "prop-types";
 
 const App = (props) => {
 
-  const {movieTitle, movieGenre, movieYear} = props;
+  const {films} = props;
+  const film = films[3];
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <MainScreen movieTitle={movieTitle}
-            movieGenre={movieGenre}
-            movieYear={movieYear}/>
-        </Route>
+        <Route exact
+          path="/"
+          render={({history}) => (
+            <MainScreen
+              onPlayButtonClick={() => history.push(`/player/:id`)}
+              films={films}/>
+          )}
+        />
         <Route exact path="/login">
           <SignInScreen />
         </Route>
         <Route exact path="/mylist">
           <MyListScreen />
         </Route>
-        <Route exact path="/films/:id">
-          <MoviePageScreen />
-        </Route>
+        <Route exact
+          path="/films/:id"
+          render={({history}) => (
+            <MoviePageScreen
+              onPlayButtonClick={() => history.push(`/player/:id`)}
+              film={film}/>
+          )}
+        />
         <Route exact path="/films/:id/review">
-          <AddReviewScreen />
+          <AddReviewScreen
+            film={film}/>
         </Route>
-        <Route exact path="/player/:id">
-          <PlayerScreen />
-        </Route>
+        <Route exact
+          path="/player/:id"
+          render={({history}) => (
+            <PlayerScreen onExitPlayerButtonClick={() => history.push(`/films/:id`)}
+            />
+          )}
+        />
       </Switch>
     </BrowserRouter>
   );
 };
 
 App.propTypes = {
-  movieTitle: PropTypes.string.isRequired,
-  movieGenre: PropTypes.string.isRequired,
-  movieYear: PropTypes.string.isRequired
+  films: PropTypes.array.isRequired,
 };
 
 export default App;
