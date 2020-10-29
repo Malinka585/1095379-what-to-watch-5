@@ -12,7 +12,7 @@ const AddReviewScreen = (props) => {
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src={`img/${filmBackGround}`} alt={filmTitle}/>
+          <img src={filmBackGround} alt={filmTitle}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -45,7 +45,7 @@ const AddReviewScreen = (props) => {
         </header>
 
         <div className="movie-card__poster movie-card__poster--small">
-          <img src={`img/${filmPoster}`} alt={filmTitle} width="218" height="327" />
+          <img src={filmPoster} alt={filmTitle} width="218" height="327" />
         </div>
       </div>
 
