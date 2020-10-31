@@ -22,15 +22,15 @@ const generatefilmTitle = () => {
 
 const generatefilmPoster = () => {
   const filmPosters = [
-    `bohemian-rhapsody.jpg`,
-    `dardjeeling-limited.jpg`,
-    `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-    `johnny-english.jpg`,
-    `macbeth.jpg`,
-    `midnight-special.jpg`,
-    `mindhunter.jpg`,
-    `moonrise-kingdom.jpg`,
-    `no-country-for-old-men.jpg`
+    `img/bohemian-rhapsody.jpg`,
+    `img/dardjeeling-limited.jpg`,
+    `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+    `img/johnny-english.jpg`,
+    `img/macbeth.jpg`,
+    `img/midnight-special.jpg`,
+    `img/mindhunter.jpg`,
+    `img/moonrise-kingdom.jpg`,
+    `img/no-country-for-old-men.jpg`
   ];
 
   const randomIndex = getRandomInteger(0, filmPosters.length - 1);
@@ -110,7 +110,7 @@ const generateFilm = () => {
 
   return {
     id: generateId(),
-    filmBackGround: `bg-the-grand-budapest-hotel.jpg`,
+    filmBackGround: `img/bg-the-grand-budapest-hotel.jpg`,
     filmPoster: generatefilmPoster(),
     filmTitle: generatefilmTitle(),
     filmGenre: generatefilmGenre(),
@@ -122,7 +122,7 @@ const generateFilm = () => {
     filmDuration: generateFilmDuration(),
     filmComments: generateFilmComments(),
     voiceCount: `125`,
-    preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
     isInwatchlist: Boolean(getRandomInteger(0, 1))
   };
 };

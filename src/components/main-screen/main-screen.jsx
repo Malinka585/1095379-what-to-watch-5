@@ -1,3 +1,4 @@
+
 import React from "react";
 import PropTypes from "prop-types";
 import MovieList from "../movie-list/movie-list";
@@ -11,7 +12,7 @@ const MainScreen = (props) => {
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src={`img/${filmBackGround}`} alt="The Grand Budapest Hotel" />
+          <img src={filmBackGround} alt="The Grand Budapest Hotel" />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -35,7 +36,7 @@ const MainScreen = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className ="movie-card__poster">
-              <img src={`img/${filmPoster}`} alt={filmTitle} width="218" height="327" />
+              <img src={filmPoster} alt={filmTitle} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">

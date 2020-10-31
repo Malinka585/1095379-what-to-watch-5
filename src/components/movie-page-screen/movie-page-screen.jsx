@@ -11,7 +11,7 @@ const MoviePageScreen = (props) => {
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={`img/${filmBackGround}`} alt={filmTitle}/>
+            <img src={filmBackGround} alt={filmTitle}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -62,7 +62,7 @@ const MoviePageScreen = (props) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={`img/${filmPoster}`} alt={filmTitle} width="218" height="327" />
+              <img src={filmPoster} alt={filmTitle} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
