@@ -41,7 +41,7 @@ export const generateFilmComments = () => {
       comment: generateComment(),
       commentAutor: generateCommentAutor(),
       rating: generateFilmRating(0, 9),
-      commentDate: generateDate()
+      commentDate: generateDate().toString()
     };
   };
 

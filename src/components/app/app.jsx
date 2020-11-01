@@ -36,7 +36,9 @@ const App = (props) => {
           render={({history}) => (
             <MoviePageScreen
               onPlayButtonClick={() => history.push(`/player/:id`)}
-              film={film}/>
+              film={film}
+              films={films}
+            />
           )}
         />
         <Route exact path="/films/:id/review">
