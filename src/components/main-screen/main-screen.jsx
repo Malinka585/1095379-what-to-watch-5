@@ -1,4 +1,3 @@
-
 import React from "react";
 import PropTypes from "prop-types";
 import MovieList from "../movie-list/movie-list";
