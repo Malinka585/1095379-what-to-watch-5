@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import MovieList from "../movie-list/movie-list";
 import GenreList from "../genre-list/genre-list";
 import {connect} from "react-redux";
+import ShowMoreButton from "../show-more-button/show-more-button";
 
 const MainScreen = (props) => {
-  const {films, onPlayButtonClick, filteredFilmCards} = props;
+  const {films, onPlayButtonClick, filteredFilmCards, filmsCountToShow} = props;
   const promoFilm = films[0];
   const {filmTitle, filmPoster, filmBackGround, filmGenre, filmDate} = promoFilm;
 
@@ -71,11 +72,9 @@ const MainScreen = (props) => {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenreList/>
 
-          <MovieList films={filteredFilmCards} />
+          <MovieList films={filteredFilmCards.slice(0, filmsCountToShow)} />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {filteredFilmCards.length > filmsCountToShow && <ShowMoreButton/>}
         </section>
 
         <footer className="page-footer">
@@ -98,6 +97,7 @@ const MainScreen = (props) => {
 
 const mapStateToProps = (state) => ({
   filteredFilmCards: state.filteredFilmCards,
+  filmsCountToShow: state.filmsCountToShow,
 });
 
 MainScreen.propTypes = {
@@ -111,6 +111,7 @@ MainScreen.propTypes = {
   })).isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
   filteredFilmCards: PropTypes.array.isRequired,
+  filmsCountToShow: PropTypes.number.isRequired,
 };
 
 export {MainScreen};
