@@ -4,26 +4,24 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 
 const ShowMoreButton = (props) => {
-  const {addMoreFilms} = props;
+  const {onShowMore} = props;
 
   return (
     <div className="catalog__more">
       <button
         className="catalog__button"
         type="button"
-        onClick={() => {
-          addMoreFilms();
-        }}>Show more</button>
+        onClick={onShowMore}>Show more</button>
     </div>
   );
 };
 
 ShowMoreButton.propTypes = {
-  addMoreFilms: PropTypes.func.isRequired,
+  onShowMore: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addMoreFilms() {
+  onShowMore() {
     dispatch(ActionCreator.addFilmsCount());
   },
 });
