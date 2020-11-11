@@ -5,10 +5,10 @@ import {ActionCreator} from "../../store/action";
 import {GENRE_DEFAULT} from "../../const";
 
 const GenreList = (props) => {
-  const {genreList, genre, filterFilms, changeGenre, resetGenreList} = props;
+  const {genreList, genre, changeGenre, resetGenreList} = props;
 
   const chooseFilms = (genreItem) => {
-    return genreItem !== GENRE_DEFAULT ? filterFilms(genreItem) : resetGenreList();
+    return genreItem !== GENRE_DEFAULT ? changeGenre(genreItem) : resetGenreList();
   };
 
   return (
@@ -21,7 +21,6 @@ const GenreList = (props) => {
             className="catalog__genres-link"
             onClick={(evt) => {
               evt.preventDefault();
-              changeGenre(genreItem);
               chooseFilms(genreItem);
             }}
           >
@@ -35,7 +34,6 @@ const GenreList = (props) => {
 GenreList.propTypes = {
   genreList: PropTypes.array.isRequired,
   genre: PropTypes.string.isRequired,
-  filterFilms: PropTypes.func.isRequired,
   changeGenre: PropTypes.func.isRequired,
   resetGenreList: PropTypes.func.isRequired,
 };
@@ -49,9 +47,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeGenre(genre) {
     dispatch(ActionCreator.incrementGenre(genre));
-  },
-  filterFilms(genre) {
-    dispatch(ActionCreator.incrementFilmsCards(genre));
   },
   resetGenreList() {
     dispatch(ActionCreator.resetList());

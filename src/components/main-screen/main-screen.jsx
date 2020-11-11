@@ -4,6 +4,9 @@ import MovieList from "../movie-list/movie-list";
 import GenreList from "../genre-list/genre-list";
 import {connect} from "react-redux";
 import ShowMoreButton from "../show-more-button/show-more-button";
+import withMovieList from "../../hocs/with-movie-list/with-movie-list";
+
+const MovieListWrapped = withMovieList(MovieList);
 
 const MainScreen = (props) => {
   const {films, onPlayButtonClick, filteredFilmCards, filmsCountToShow} = props;
@@ -72,7 +75,7 @@ const MainScreen = (props) => {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenreList/>
 
-          <MovieList films={filteredFilmCards.slice(0, filmsCountToShow)} />
+          <MovieListWrapped films={filteredFilmCards.slice(0, filmsCountToShow)} />
 
           {filteredFilmCards.length > filmsCountToShow && <ShowMoreButton/>}
         </section>

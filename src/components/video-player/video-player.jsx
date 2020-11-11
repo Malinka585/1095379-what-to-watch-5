@@ -1,75 +1,24 @@
-import React, {PureComponent, createRef} from "react";
+import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 
 
-export default class VideoPlayer extends PureComponent {
-  constructor(props) {
-    super(props);
+const VideoPlayer = (props) => {
 
-    this.videoRef = createRef();
+  const {children} = props;
 
-    this.state = {
-      isLoading: true,
-    };
-  }
+  return (
+    <Fragment>
+      {children}
+    </Fragment>
+  );
+};
 
-  componentDidMount() {
-    const {src, poster, width, heigth, muted} = this.props;
-    const video = this.videoRef.current;
-
-    video.src = src;
-    video.poster = poster;
-    video.width = width;
-    video.heigth = heigth;
-    video.muted = muted;
-
-    video.oncanplaythrough = () => this.setState({
-      isLoading: false,
-    });
-  }
-
-  componentWillUnmount() {
-    const video = this.videoRef.current;
-
-    video.oncanplaythrough = null;
-  }
-
-  render() {
-    const {isLoading} = this.state;
-
-    return (
-      <video
-        ref={this.videoRef}
-        disabled={isLoading}
-      >
-      </video>
-    );
-  }
-
-  componentDidUpdate() {
-    const video = this.videoRef.current;
-
-    const {src, poster, width, heigth, muted, isPlaying} = this.props;
-
-    video.src = src;
-    video.poster = poster;
-    video.width = width;
-    video.heigth = heigth;
-    video.muted = muted;
-
-    if (isPlaying) {
-      video.play();
-    } else {
-      video.load();
-    }
-  }
-}
 
 VideoPlayer.propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
-  src: PropTypes.string.isRequired,
-  poster: PropTypes.string.isRequired,
-  width: PropTypes.string.isRequired,
-  heigth: PropTypes.string.isRequired,
-  muted: PropTypes.bool.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired,
 };
+
+export default VideoPlayer;

@@ -15,12 +15,8 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         genre: action.payload,
         filmsCountToShow: FILMS_CONT_PER_STEP,
-      });
-    case ActionType.INCREMENT_FILM_CARDS:
-      return extend(state, {
         filteredFilmCards: films.filter((filmCard) => filmCard.filmGenre === action.payload),
       });
-
     case ActionType.RESET_LIST:
       return extend({}, initialState);
 

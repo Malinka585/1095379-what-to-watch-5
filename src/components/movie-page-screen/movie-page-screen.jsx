@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import Tabs from "../tabs/tabs";
 import MovieList from "../movie-list/movie-list";
+import withMovieList from "../../hocs/with-movie-list/with-movie-list";
+import withTabs from "../../hocs/with-tabs/with-tabs";
+
+const MovieListWrapped = withMovieList(MovieList);
+const TabsWrapped = withTabs(Tabs);
 
 const MoviePageScreen = (props) => {
   const {film, onPlayButtonClick, films} = props;
@@ -72,7 +77,7 @@ const MoviePageScreen = (props) => {
             </div>
 
             <div className="movie-card__desc">
-              <Tabs film={film}/>
+              <TabsWrapped film={film}/>
 
             </div>
           </div>
@@ -82,7 +87,7 @@ const MoviePageScreen = (props) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MovieList films={likeFilms}/>
+          <MovieListWrapped films={likeFilms}/>
         </section>
 
         <footer className="page-footer">
