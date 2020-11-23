@@ -1,21 +1,18 @@
-import {extend, getGenreList} from "../utils/redux";
-import {ActionType} from "./action";
-import films from "../mocks/films";
-import {GENRE_DEFAULT, FILMS_CONT_PER_STEP} from "../const";
+import {extend} from "../../../utils/redux";
+import {ActionType} from "../../action";
+import {GENRE_DEFAULT, FILMS_CONT_PER_STEP} from "../../../const";
 
 const initialState = {
-  genreList: getGenreList(films),
   genre: GENRE_DEFAULT,
-  filteredFilmCards: films,
   filmsCountToShow: FILMS_CONT_PER_STEP,
 };
-const reducer = (state = initialState, action) => {
+
+const filmsProcess = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.INCREMENT_GENRE:
       return extend(state, {
         genre: action.payload,
         filmsCountToShow: FILMS_CONT_PER_STEP,
-        filteredFilmCards: films.filter((filmCard) => filmCard.filmGenre === action.payload),
       });
     case ActionType.RESET_LIST:
       return extend({}, initialState);
@@ -28,4 +25,5 @@ const reducer = (state = initialState, action) => {
 
   return state;
 };
-export {reducer};
+
+export {filmsProcess};

@@ -11,16 +11,16 @@ const ReviewsTab = (props) => {
   return (
     <div className="movie-card__reviews movie-card__row">
       <div className="movie-card__reviews-col">
-        {leftColReviews.map((review, i) => (
+        {leftColReviews.map((review) => (
           <ReviewScreen
-            key ={`${i}`}
+            key ={`${review.id}`}
             review={review}/>
         ))}
       </div>
       <div className="movie-card__reviews-col">
-        {rightColReviews.map((review, i) => (
+        {rightColReviews.map((review) => (
           <ReviewScreen
-            key ={`${i}`}
+            key ={`${review.id}`}
             review={review}/>
         ))}
       </div>

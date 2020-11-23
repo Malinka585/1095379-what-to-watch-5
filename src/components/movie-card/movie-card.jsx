@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 const MovieCard = (props) => {
   const {film, onFilmCardOver, onFilmCardLeave, children} = props;
-  const {id, filmTitle} = film;
+  const {id, name} = film;
 
   return (
     <article
@@ -14,7 +14,7 @@ const MovieCard = (props) => {
       onMouseLeave={() => onFilmCardLeave()}>
       {children}
       <h3 className="small-movie-card__title">
-        <Link className="small-movie-card__link" to={`/films/${id}`}>{filmTitle}</Link>
+        <Link className="small-movie-card__link" to={`/films/${id}`}>{name}</Link>
       </h3>
     </article>
   );
@@ -23,8 +23,7 @@ const MovieCard = (props) => {
 MovieCard.propTypes = {
   film: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    filmTitle: PropTypes.string.isRequired,
-    filmPoster: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
   }).isRequired,
   onFilmCardOver: PropTypes.func.isRequired,
   onFilmCardLeave: PropTypes.func.isRequired,

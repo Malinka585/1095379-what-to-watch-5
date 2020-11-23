@@ -1,28 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import Tabs from "../tabs/tabs";
+import FilmDetailTabs from "../film-detail-tabs/film-detail-tabs";
 import MovieList from "../movie-list/movie-list";
 import withMovieList from "../../hocs/with-movie-list/with-movie-list";
 import withTabs from "../../hocs/with-tabs/with-tabs";
+import {connect} from "react-redux";
+import {getLikeFilms} from "../../store/selectors";
 
 const MovieListWrapped = withMovieList(MovieList);
-const TabsWrapped = withTabs(Tabs);
+const FilmDetailTabsWrapped = withTabs(FilmDetailTabs);
 
 const MoviePageScreen = (props) => {
-  const {film, onPlayButtonClick, films} = props;
-  const {filmDate, filmGenre, filmTitle, filmBackGround, filmPoster, id} = film;
-
-  const likeFilms = films.filter((filmItem) =>
-    filmItem.filmGenre === filmGenre
-    && filmItem.id !== id).slice(0, 4);
+  const {filmData, onPlayButtonClick, likeFilms} = props;
+  const {released, genre, name, backgroundImage, posterImage, id} = filmData;
 
   return (
     <React.Fragment>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={filmBackGround} alt={filmTitle}/>
+            <img src={backgroundImage} alt={name}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -45,10 +43,10 @@ const MoviePageScreen = (props) => {
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{filmTitle}</h2>
+              <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{filmGenre}</span>
-                <span className="movie-card__year">{filmDate}</span>
+                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__year">{released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -64,7 +62,7 @@ const MoviePageScreen = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link className="btn movie-card__button" to={`/films/:id/review`}>Add review</Link>
+                <Link className="btn movie-card__button" to={`/films/${id}/review`}>Add review</Link>
               </div>
             </div>
           </div>
@@ -73,11 +71,11 @@ const MoviePageScreen = (props) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={filmPoster} alt={filmTitle} width="218" height="327" />
+              <img src={posterImage} alt={name} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <TabsWrapped film={film}/>
+              <FilmDetailTabsWrapped film={filmData}/>
 
             </div>
           </div>
@@ -108,17 +106,23 @@ const MoviePageScreen = (props) => {
   );
 };
 
+const mapStateToProps = (state, props) => ({
+  likeFilms: getLikeFilms(state, props),
+});
+
 MoviePageScreen.propTypes = {
-  film: PropTypes.shape({
+  filmData: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    filmTitle: PropTypes.string.isRequired,
-    filmBackGround: PropTypes.string.isRequired,
-    filmGenre: PropTypes.string.isRequired,
-    filmDate: PropTypes.string.isRequired,
-    filmPoster: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+    posterImage: PropTypes.string.isRequired,
   }).isRequired,
-  films: PropTypes.array.isRequired,
+  // films: PropTypes.array.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
+  likeFilms: PropTypes.array.isRequired,
 };
 
-export default MoviePageScreen;
+export {MoviePageScreen};
+export default connect(mapStateToProps, null)(MoviePageScreen);

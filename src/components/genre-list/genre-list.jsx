@@ -1,15 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/action";
-import {GENRE_DEFAULT} from "../../const";
+import {incrementGenre, resetList} from "../../store/action";
+import {getGenre, getGenreList} from "../../store/selectors";
 
 const GenreList = (props) => {
-  const {genreList, genre, changeGenre, resetGenreList} = props;
-
-  const chooseFilms = (genreItem) => {
-    return genreItem !== GENRE_DEFAULT ? changeGenre(genreItem) : resetGenreList();
-  };
+  const {genreList, genre, changeGenre} = props;
 
   return (
     <ul className="catalog__genres-list">
@@ -21,7 +17,7 @@ const GenreList = (props) => {
             className="catalog__genres-link"
             onClick={(evt) => {
               evt.preventDefault();
-              chooseFilms(genreItem);
+              changeGenre(genreItem);
             }}
           >
             {genreItem}</a>
@@ -39,17 +35,16 @@ GenreList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  genre: state.genre,
-  filteredFilmCards: state.filteredFilmCards,
-  genreList: state.genreList
+  genre: getGenre(state),
+  genreList: getGenreList(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeGenre(genre) {
-    dispatch(ActionCreator.incrementGenre(genre));
+    dispatch(incrementGenre(genre));
   },
   resetGenreList() {
-    dispatch(ActionCreator.resetList());
+    dispatch(resetList());
   },
 });
 

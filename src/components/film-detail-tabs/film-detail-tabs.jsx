@@ -4,8 +4,9 @@ import OverviewTab from "../overview-tab/overview-tab";
 import ReviewsTab from "../reviews-tab/reviews-tab";
 import DetailsTab from "../details-tab/details-tab";
 import {TabsHeaders} from "../../const";
+import withReviews from "../../hocs/with-reviews/with-reviews";
 
-
+const ReviewsTabWrapped = withReviews(ReviewsTab);
 const renderTabsPage = (activeTab, film) => {
 
   switch (activeTab) {
@@ -14,7 +15,7 @@ const renderTabsPage = (activeTab, film) => {
     case TabsHeaders.DETAILS:
       return <DetailsTab film={film}/>;
     case TabsHeaders.REVIEWS:
-      return <ReviewsTab reviews={film.filmComments}/>;
+      return <ReviewsTabWrapped id={film.id}/>;
     default:
       return (
         <h1>
@@ -26,7 +27,7 @@ const renderTabsPage = (activeTab, film) => {
   }
 };
 
-const Tabs = (props) => {
+const FilmDetailTabs = (props) => {
 
   const {activeTab, onTabClick, film} = props;
 
@@ -34,9 +35,9 @@ const Tabs = (props) => {
     <React.Fragment>
       <nav className="movie-nav movie-card__nav">
         <ul className="movie-nav__list">
-          {Object.values(TabsHeaders).map((value, i) => {
+          {Object.values(TabsHeaders).map((value) => {
             return (
-              <li key ={`${i}`}
+              <li key ={`${value}`}
                 className={`movie-nav__item ${activeTab === value ? `movie-nav__item--active` : ``}`}>
                 <a
                   className="movie-nav__link"
@@ -52,10 +53,10 @@ const Tabs = (props) => {
   );
 };
 
-Tabs.propTypes = {
+FilmDetailTabs.propTypes = {
   film: PropTypes.object.isRequired,
   activeTab: PropTypes.string.isRequired,
   onTabClick: PropTypes.func.isRequired,
 };
 
-export default Tabs;
+export default FilmDetailTabs;

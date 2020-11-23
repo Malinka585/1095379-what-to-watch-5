@@ -12,18 +12,18 @@ const MovieList = (props) => {
 
   return (
     <div className="catalog__movies-list">
-      {films.map((film, i) => (
+      {films.map((film) => (
         <MovieCard
-          key ={`${i}`}
+          key ={`${film.id}`}
           film={film}
           onFilmCardOver={onFilmCardOver}
           onFilmCardLeave={onFilmCardLeave}>
           <VideoPlayer
-            src={film.src}
+            src={film.previewVideoLink}
             isPlaying={activeCard === film.id}
-            poster={film.filmPoster}
+            poster={film.previewImage}
             width="280"
-            heigth="175"
+            height="175"
             muted={true}
           />
         </MovieCard>
@@ -33,7 +33,11 @@ const MovieList = (props) => {
 };
 
 MovieList.propTypes = {
-  films: PropTypes.array.isRequired,
+  films: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
+  })).isRequired,
   onFilmCardOver: PropTypes.func.isRequired,
   onFilmCardLeave: PropTypes.func.isRequired,
   activeCard: PropTypes.number.isRequired,
