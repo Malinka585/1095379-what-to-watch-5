@@ -1,4 +1,4 @@
-import {getRandomInteger, generateFilmRating} from "../utils/common.js";
+import {getRandomInteger, generateRating, generateId} from "../utils/common.js";
 
 export const generateFilmComments = () => {
   const comments = [
@@ -8,7 +8,7 @@ export const generateFilmComments = () => {
     `Almost two hours? Seriously?`
   ];
 
-  const autors = [
+  const authors = [
     `Tim Macoveev`,
     `John Doe`,
     `andruuu`,
@@ -28,19 +28,20 @@ export const generateFilmComments = () => {
     return comments[getRandomInteger(0, comments.length - 1)];
   };
 
-  const generateCommentAutor = () => {
-    return autors[getRandomInteger(0, autors.length - 1)];
+  const generateCommentAuthor = () => {
+    return authors[getRandomInteger(0, authors.length - 1)];
   };
 
   const generateDate = () => {
-    return commentDates[getRandomInteger(0, autors.length - 1)];
+    return commentDates[getRandomInteger(0, authors.length - 1)];
   };
 
   const generatefilmComment = () => {
     return {
+      id: generateId(),
       comment: generateComment(),
-      commentAutor: generateCommentAutor(),
-      rating: generateFilmRating(0, 9),
+      commentAuthor: generateCommentAuthor(),
+      rating: generateRating(0, 9),
       commentDate: generateDate().toString()
     };
   };

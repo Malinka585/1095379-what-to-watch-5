@@ -16,7 +16,7 @@ export const getRandomArrayElements = (array, count) => {
   return randomArray;
 };
 
-export const generateFilmRating = (min, max) => {
+export const generateRating = (min, max) => {
   let rand = min - 0.1 + Math.random() * (max - min + 1);
   return rand.toFixed(1);
 };

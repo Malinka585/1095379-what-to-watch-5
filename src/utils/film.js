@@ -26,3 +26,21 @@ export const filmLevel = (rating) => {
 
   return level;
 };
+
+const snakeToCamel = (str) =>
+  str.replace(/([-_]\w)/g, (group) =>
+    group[1].toUpperCase()
+  );
+
+export const snakeToCamelAdapter = (snakeObj) => {
+  let camelObj = {};
+
+  Object.entries(snakeObj).forEach((entry) => {
+    const renamedEntry = {
+      [snakeToCamel(entry[0])]: entry[1]
+    };
+    Object.assign(camelObj, renamedEntry);
+  });
+
+  return camelObj;
+};

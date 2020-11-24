@@ -1,23 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import MovieList from "../movie-list/movie-list";
-import GenreList from "../genre-list/genre-list";
 import {connect} from "react-redux";
-import ShowMoreButton from "../show-more-button/show-more-button";
-import withMovieList from "../../hocs/with-movie-list/with-movie-list";
-
-const MovieListWrapped = withMovieList(MovieList);
+import FilmsCatalog from "../films-catalog/films-catalog";
 
 const MainScreen = (props) => {
-  const {films, onPlayButtonClick, filteredFilmCards, filmsCountToShow} = props;
-  const promoFilm = films[0];
-  const {filmTitle, filmPoster, filmBackGround, filmGenre, filmDate} = promoFilm;
+  const {onPlayButtonClick, promoFilm} = props;
+  const {name, posterImage, backgroundImage, genre, released} = promoFilm;
 
   return (
     <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src={filmBackGround} alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt="The Grand Budapest Hotel" />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -41,14 +35,14 @@ const MainScreen = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className ="movie-card__poster">
-              <img src={filmPoster} alt={filmTitle} width="218" height="327" />
+              <img src={posterImage} alt={name} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{filmTitle}</h2>
+              <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{filmGenre}</span>
-                <span className="movie-card__year">{filmDate}</span>
+                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__year">{released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -73,11 +67,8 @@ const MainScreen = (props) => {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenreList/>
 
-          <MovieListWrapped films={filteredFilmCards.slice(0, filmsCountToShow)} />
-
-          {filteredFilmCards.length > filmsCountToShow && <ShowMoreButton/>}
+          <FilmsCatalog/>
         </section>
 
         <footer className="page-footer">
@@ -98,23 +89,20 @@ const MainScreen = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  filteredFilmCards: state.filteredFilmCards,
-  filmsCountToShow: state.filmsCountToShow,
+const mapStateToProps = ({DATA}) => ({
+  promoFilm: DATA.promoFilm,
 });
 
 MainScreen.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
+  promoFilm: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    filmTitle: PropTypes.string.isRequired,
-    filmPoster: PropTypes.string.isRequired,
-    filmBackGround: PropTypes.string.isRequired,
-    filmGenre: PropTypes.string.isRequired,
-    filmDate: PropTypes.string.isRequired,
-  })).isRequired,
+    name: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
+  }).isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
-  filteredFilmCards: PropTypes.array.isRequired,
-  filmsCountToShow: PropTypes.number.isRequired,
 };
 
 export {MainScreen};

@@ -1,28 +1,31 @@
 import React from "react";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router as BrowserRouter} from "react-router-dom";
 import MainScreen from "../main-screen/main-screen";
 import SignInScreen from "../sign-in-screen/sign-in-screen";
 import MyListScreen from "../my-list-screen/my-list-screen";
 import MoviePageScreen from "../movie-page-screen/movie-page-screen";
 import AddReviewScreen from "../add-review-screen/add-review-screen";
 import PlayerScreen from "../player-screen/player-screen";
+import browserHistory from "../../browser-history";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import withSelectedFilm from "../../hocs/with-selected-film/with-selected-film";
 
-
+const MoviePageScreenWrapped = withSelectedFilm(MoviePageScreen);
 const App = (props) => {
 
   const {films} = props;
-  const film = films[3];
+  const film = films[5];
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact
           path="/"
           render={({history}) => (
             <MainScreen
               onPlayButtonClick={() => history.push(`/player/:id`)}
-              films={films}/>
+            />
           )}
         />
         <Route exact path="/login">
@@ -33,11 +36,10 @@ const App = (props) => {
         </Route>
         <Route exact
           path="/films/:id"
-          render={({history}) => (
-            <MoviePageScreen
-              onPlayButtonClick={() => history.push(`/player/:id`)}
-              film={film}
-              films={films}
+          render={({history, match}) => (
+            <MoviePageScreenWrapped
+              onPlayButtonClick={(id) => history.push(`/player/${id}`)}
+              id={Number(match.params.id)}
             />
           )}
         />
@@ -57,8 +59,13 @@ const App = (props) => {
   );
 };
 
+const mapStateToProps = ({DATA}) => ({
+  films: DATA.films,
+});
+
 App.propTypes = {
   films: PropTypes.array.isRequired,
 };
 
-export default App;
+export {App};
+export default connect(mapStateToProps)(App);

@@ -8,14 +8,14 @@ const ReviewFormWrapped = withReviewForm(ReviewForm);
 
 const AddReviewScreen = (props) => {
   const {film} = props;
-  const {filmTitle, filmBackGround, filmPoster} = film;
+  const {name, backgroundImage, posterImage} = film;
 
 
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src={filmBackGround} alt={filmTitle}/>
+          <img src={backgroundImage} alt={name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -32,7 +32,7 @@ const AddReviewScreen = (props) => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link className="breadcrumbs__link" to={`/films/:id`}>{filmTitle}</Link>
+                <Link className="breadcrumbs__link" to={`/films/:id`}>{name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
@@ -48,7 +48,7 @@ const AddReviewScreen = (props) => {
         </header>
 
         <div className="movie-card__poster movie-card__poster--small">
-          <img src={filmPoster} alt={filmTitle} width="218" height="327" />
+          <img src={posterImage} alt={name} width="218" height="327" />
         </div>
       </div>
 
@@ -61,9 +61,9 @@ const AddReviewScreen = (props) => {
 
 AddReviewScreen.propTypes = {
   film: PropTypes.shape({
-    filmTitle: PropTypes.string.isRequired,
-    filmBackGround: PropTypes.string.isRequired,
-    filmPoster: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired,
   }).isRequired,
 };
 

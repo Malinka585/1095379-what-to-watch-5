@@ -1,11 +1,11 @@
 import {generateFilmComments} from "./reviews.js";
-import {getRandomInteger, getRandomArrayElements, generateId, generateFilmRating} from "../utils/common.js";
+import {getRandomInteger, getRandomArrayElements, generateId, generateRating} from "../utils/common.js";
 
-const MIN_FILM_DURATION = 60;
+const MIN_RUN_TIME = 60;
 const FILMS_COUNT = 58;
 
-const generatefilmTitle = () => {
-  const filmTitles = [
+const generateName = () => {
+  const name = [
     `Fantastic Beasts: The Crimes of Grindelwald`,
     `Bohemian Rhapsody`,
     `Macbeth`,
@@ -15,13 +15,13 @@ const generatefilmTitle = () => {
     `Revenant`
   ];
 
-  const randomIndex = getRandomInteger(0, filmTitles.length - 1);
+  const randomIndex = getRandomInteger(0, name.length - 1);
 
-  return filmTitles[randomIndex];
+  return name[randomIndex];
 };
 
-const generatefilmPoster = () => {
-  const filmPosters = [
+const generatePosterImage = () => {
+  const posterImage = [
     `img/bohemian-rhapsody.jpg`,
     `img/dardjeeling-limited.jpg`,
     `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
@@ -33,13 +33,13 @@ const generatefilmPoster = () => {
     `img/no-country-for-old-men.jpg`
   ];
 
-  const randomIndex = getRandomInteger(0, filmPosters.length - 1);
+  const randomIndex = getRandomInteger(0, posterImage.length - 1);
 
-  return filmPosters[randomIndex];
+  return posterImage[randomIndex];
 };
 
-const generateFilmDescription = () => {
-  const filmDescriptions = [
+const generateDescription = () => {
+  const descriptions = [
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
     `Cras aliquet varius magna, non porta ligula feugiat eget.`,
     `Fusce tristique felis at fermentum pharetra.`,
@@ -53,31 +53,31 @@ const generateFilmDescription = () => {
     `In rutrum ac purus sit amet tempus.`
   ];
 
-  return getRandomArrayElements(filmDescriptions, 5);
+  return getRandomArrayElements(descriptions, 5);
 };
 
-const generateFilmDuration = () => {
-  return getRandomInteger(MIN_FILM_DURATION, MIN_FILM_DURATION * 3);
+const generateRunTime = () => {
+  return getRandomInteger(MIN_RUN_TIME, MIN_RUN_TIME * 3);
 };
 
-const generatefilmGenre = () => {
-  const filmGenres = [`Drama`, `Mystery`, `Film-Noir`, `Musical`, `Western`, `Comedy`, `Cartoon`];
+const generateGenre = () => {
+  const genres = [`Drama`, `Mystery`, `Film-Noir`, `Musical`, `Western`, `Comedy`, `Cartoon`];
 
-  const randomIndex = getRandomInteger(0, filmGenres.length - 1);
+  const randomIndex = getRandomInteger(0, genres.length - 1);
 
-  return filmGenres[randomIndex];
+  return genres[randomIndex];
 };
 
-const generateFilmRegisseur = () => {
-  const filmRegisseurs = [`Anthony Mann`, `Quentin Jerome Tarantino`, `Timur Bekmambetov`, `Tim Burton`];
+const generateDirector = () => {
+  const director = [`Anthony Mann`, `Quentin Jerome Tarantino`, `Timur Bekmambetov`, `Tim Burton`];
 
-  const randomIndex = getRandomInteger(0, filmRegisseurs.length - 1);
+  const randomIndex = getRandomInteger(0, director.length - 1);
 
-  return filmRegisseurs[randomIndex];
+  return director[randomIndex];
 };
 
-const generateFilmActors = () => {
-  const filmActors = [
+const generateStarring = () => {
+  const starring = [
     `Aamir Khan`,
     `Akshay Kumar`,
     `Ajay Devgn`,
@@ -89,11 +89,11 @@ const generateFilmActors = () => {
     `Aruna Irani`
   ];
 
-  return getRandomArrayElements(filmActors, filmActors.length);
+  return getRandomArrayElements(starring, starring.length);
 };
 
-const generateFilmDate = () => {
-  const filmDates = [
+const generateReleased = () => {
+  const released = [
     `2015`,
     `2016`,
     `2011`,
@@ -101,29 +101,33 @@ const generateFilmDate = () => {
     `2020`
   ];
 
-  const randomIndex = getRandomInteger(0, filmDates.length - 1);
+  const randomIndex = getRandomInteger(0, released.length - 1);
 
-  return filmDates[randomIndex];
+  return released[randomIndex];
 };
 
 const generateFilm = () => {
 
   return {
     id: generateId(),
-    filmBackGround: `img/bg-the-grand-budapest-hotel.jpg`,
-    filmPoster: generatefilmPoster(),
-    filmTitle: generatefilmTitle(),
-    filmGenre: generatefilmGenre(),
-    filmDate: generateFilmDate(),
-    filmDescription: generateFilmDescription().join(`, `),
-    filmRating: generateFilmRating(0, 9),
-    filmRegisseur: generateFilmRegisseur(),
-    filmActors: generateFilmActors(),
-    filmDuration: generateFilmDuration(),
+    backGroundImage: `img/bg-the-grand-budapest-hotel.jpg`,
+    posterImage: generatePosterImage(),
+    previewImage: `img/the-grand-budapest-hotel.jpg`,
+    backgroundColor: `#ffffff`,
+    videoLink: `https://some-link`,
+    previewVideoLink: `https://some-link`,
+    name: generateName(),
+    genre: generateGenre(),
+    released: generateReleased(),
+    description: generateDescription().join(`, `),
+    rating: generateRating(0, 9),
+    director: generateDirector(),
+    starring: generateStarring(),
+    runTime: generateRunTime(),
     filmComments: generateFilmComments(),
-    voiceCount: `125`,
+    scoresCount: `125`,
     src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
-    isInwatchlist: Boolean(getRandomInteger(0, 1))
+    isFavorite: Boolean(getRandomInteger(0, 1))
   };
 };
 
