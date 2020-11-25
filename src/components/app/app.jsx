@@ -10,6 +10,7 @@ import browserHistory from "../../browser-history";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import withSelectedFilm from "../../hocs/with-selected-film/with-selected-film";
+import PrivateRoute from "../private-route/private-route";
 
 const MoviePageScreenWrapped = withSelectedFilm(MoviePageScreen);
 const App = (props) => {
@@ -28,12 +29,20 @@ const App = (props) => {
             />
           )}
         />
-        <Route exact path="/login">
-          <SignInScreen />
-        </Route>
-        <Route exact path="/mylist">
-          <MyListScreen />
-        </Route>
+        <Route
+          exact
+          path="/login"
+          render={() => (
+            <SignInScreen />
+          )}
+        />
+        <PrivateRoute
+          exact
+          path="/mylist"
+          render={() => (
+            <MyListScreen />
+          )}
+        />
         <Route exact
           path="/films/:id"
           render={({history, match}) => (
@@ -43,10 +52,14 @@ const App = (props) => {
             />
           )}
         />
-        <Route exact path="/films/:id/review">
-          <AddReviewScreen
-            film={film}/>
-        </Route>
+        <PrivateRoute
+          exact
+          path="/films/:id/review"
+          render={() => (
+            <AddReviewScreen
+              film={film}/>
+          )}
+        />
         <Route exact
           path="/player/:id"
           render={({history}) => (

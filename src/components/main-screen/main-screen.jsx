@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import FilmsCatalog from "../films-catalog/films-catalog";
+import UserBlock from "../user-block/user-block";
 
 const MainScreen = (props) => {
   const {onPlayButtonClick, promoFilm} = props;
@@ -25,11 +26,7 @@ const MainScreen = (props) => {
             </a>
           </div>
 
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
+          <UserBlock/>
         </header>
 
         <div className="movie-card__wrap">
