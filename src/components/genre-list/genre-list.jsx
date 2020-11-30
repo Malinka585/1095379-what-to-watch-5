@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {incrementGenre, resetList} from "../../store/action";
+import {incrementGenre} from "../../store/action";
 import {getGenre, getGenreList} from "../../store/selectors";
 
 const GenreList = (props) => {
@@ -31,7 +31,6 @@ GenreList.propTypes = {
   genreList: PropTypes.array.isRequired,
   genre: PropTypes.string.isRequired,
   changeGenre: PropTypes.func.isRequired,
-  resetGenreList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -42,9 +41,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeGenre(genre) {
     dispatch(incrementGenre(genre));
-  },
-  resetGenreList() {
-    dispatch(resetList());
   },
 });
 
