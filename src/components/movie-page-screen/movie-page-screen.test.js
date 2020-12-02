@@ -6,6 +6,7 @@ import {BrowserRouter} from "react-router-dom";
 jest.mock(`../user-block/user-block.jsx`, () => `UserBlock`);
 jest.mock(`../film-detail-tabs/film-detail-tabs.jsx`, () => `FilmDetailTabs`);
 jest.mock(`../movie-list/movie-list.jsx`, () => `MovieList`);
+jest.mock(`../to-my-list-button/to-my-list-button.jsx`, () => `ToMyListButton`);
 
 const likeFilms = [{
   id: 1,
@@ -34,6 +35,7 @@ const filmData = {
   backgroundImage: `img/the-grand-budapest-hotel-bg.jpg`,
   genre: `Comedy`,
   released: 2014,
+  isFavorite: false,
 };
 
 const noop = () => {};

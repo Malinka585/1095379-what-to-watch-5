@@ -11,7 +11,9 @@ const withSelectedFilm = (Component) => {
       this.state = {
         isLoading: true,
       };
+
     }
+
 
     componentDidMount() {
       const {id, getFilm} = this.props;

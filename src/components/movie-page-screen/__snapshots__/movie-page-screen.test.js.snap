@@ -97,23 +97,10 @@ Array [
                 Play
               </span>
             </button>
-            <button
-              className="btn btn--list movie-card__button"
-              type="button"
-            >
-              <svg
-                height="20"
-                viewBox="0 0 19 20"
-                width="19"
-              >
-                <use
-                  xlinkHref="#add"
-                />
-              </svg>
-              <span>
-                My list
-              </span>
-            </button>
+            <ToMyListButton
+              id={1}
+              isFavorite={false}
+            />
             <a
               className="btn movie-card__button"
               href="/films/1/review"
@@ -151,6 +138,7 @@ Array [
                 "backgroundImage": "img/the-grand-budapest-hotel-bg.jpg",
                 "genre": "Comedy",
                 "id": 1,
+                "isFavorite": false,
                 "name": "The Grand Budapest Hotel",
                 "posterImage": "img/the-grand-budapest-hotel-poster.jpg",
                 "released": 2014,

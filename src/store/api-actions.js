@@ -39,3 +39,15 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
     .then(() => dispatch(redirectToRoute(`/`)))
 );
+
+export const addReview = (id, {rating, reviewText}) => (dispatch, _getState, api) => (
+  api.post(`/comments/${id}`, {rating: Number(rating), comment: reviewText})
+    .then(() => dispatch(redirectToRoute(`/films/${id}`)))
+);
+
+export const addToFavoritesFilms = (id, status) => (dispatch, _getState, api) => (
+  api.post(`favorite/${id}/${status}`)
+    .then(() => dispatch(fetchFilmsList()))
+    .then(() => dispatch(fetchPromoFilm()))
+    .then(() => dispatch(fetchFilm(id)))
+);

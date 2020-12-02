@@ -8,13 +8,14 @@ import withTabs from "../../hocs/with-tabs/with-tabs";
 import {connect} from "react-redux";
 import {getLikeFilms} from "../../store/selectors";
 import UserBlock from "../user-block/user-block";
+import ToMyListButton from "../to-my-list-button/to-my-list-button";
 
 const MovieListWrapped = withMovieList(MovieList);
 const FilmDetailTabsWrapped = withTabs(FilmDetailTabs);
 
 const MoviePageScreen = (props) => {
   const {filmData, onPlayButtonClick, likeFilms} = props;
-  const {released, genre, name, backgroundImage, posterImage, id} = filmData;
+  const {released, genre, name, backgroundImage, posterImage, id, isFavorite} = filmData;
 
   return (
     <React.Fragment>
@@ -47,18 +48,13 @@ const MoviePageScreen = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button" onClick={onPlayButtonClick}>
+                <button className="btn btn--play movie-card__button" type="button" onClick={() => (onPlayButtonClick(id))}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <ToMyListButton id={id} isFavorite={isFavorite}/>
                 <Link className="btn movie-card__button" to={`/films/${id}/review`}>Add review</Link>
               </div>
             </div>
@@ -115,8 +111,8 @@ MoviePageScreen.propTypes = {
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
     posterImage: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
   }).isRequired,
-  // films: PropTypes.array.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
   likeFilms: PropTypes.array.isRequired,
 };

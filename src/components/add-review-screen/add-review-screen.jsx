@@ -9,7 +9,7 @@ const ReviewFormWrapped = withReviewForm(ReviewForm);
 
 const AddReviewScreen = (props) => {
   const {film} = props;
-  const {name, backgroundImage, posterImage} = film;
+  const {name, backgroundImage, posterImage, id} = film;
 
 
   return (
@@ -33,7 +33,7 @@ const AddReviewScreen = (props) => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link className="breadcrumbs__link" to={`/films/:id`}>{name}</Link>
+                <Link className="breadcrumbs__link" to={`/films/${id}`}>{name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
@@ -50,7 +50,7 @@ const AddReviewScreen = (props) => {
       </div>
 
       <div className="add-review">
-        <ReviewFormWrapped />
+        <ReviewFormWrapped id={id} />
       </div>
     </section>
   );
@@ -61,6 +61,7 @@ AddReviewScreen.propTypes = {
     name: PropTypes.string.isRequired,
     backgroundImage: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
   }).isRequired,
 };
 

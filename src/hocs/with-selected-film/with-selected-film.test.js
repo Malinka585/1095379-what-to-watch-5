@@ -4,9 +4,6 @@ import PropTypes from "prop-types";
 import {Provider} from "react-redux";
 import {withSelectedFilm} from "./with-selected-film";
 import configurateMockStore from "redux-mock-store";
-// import {fetchFilm} from "../../store/api-actions";
-
-const noop = () => {};
 
 const filmsDefault = {
   DATA: {
@@ -33,6 +30,7 @@ const filmsDefault = {
 };
 
 const mockStore = configurateMockStore()(filmsDefault);
+mockStore.dispatch = jest.fn();
 
 const MockComponent = (props) => {
   const {children} = props;

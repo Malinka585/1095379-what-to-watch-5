@@ -1,4 +1,11 @@
 import React, {PureComponent} from "react";
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
+import {addReview} from "../../store/api-actions";
+
+import {CommentLength} from "../../const";
+
+const {MIN, MAX} = CommentLength;
 
 const withReviewForm = (Component) => {
   class WithReviewForm extends PureComponent {
@@ -16,6 +23,9 @@ const withReviewForm = (Component) => {
 
     onSubmitHandle(evt) {
       evt.preventDefault();
+      const {id, postReview} = this.props;
+      const {rating, reviewText} = this.state;
+      postReview(id, {rating, reviewText});
     }
 
     onFieldChangeHandle(evt) {
@@ -25,9 +35,13 @@ const withReviewForm = (Component) => {
 
     render() {
 
+      const {rating, reviewText} = this.state;
+      const isReviewValid = rating && (reviewText.length >= MIN && reviewText.length <= MAX);
+
       return (
         <Component
           {...this.props}
+          isReviewValid={isReviewValid}
           onFieldChange={this.onFieldChangeHandle}
           onSubmit={this.onSubmitHandle}
         />
@@ -35,7 +49,21 @@ const withReviewForm = (Component) => {
     }
   }
 
-  return WithReviewForm;
+  WithReviewForm.propTypes = {
+    postReview: PropTypes.func.isRequired,
+    id: PropTypes.number.isRequired,
+  };
+
+
+  const mapDispatchToProps = (dispatch) => ({
+    postReview(id, comment) {
+      dispatch(addReview(id, comment));
+    },
+
+  });
+
+  return connect(null, mapDispatchToProps)(WithReviewForm);
 };
 
+export {withReviewForm};
 export default withReviewForm;

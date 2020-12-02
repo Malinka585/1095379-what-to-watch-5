@@ -41,3 +41,11 @@ export const getLikeFilms = createSelector(
         && film.id !== filmData.id);
     }
 );
+
+export const getFavoriteFilms = createSelector(
+    getFilms,
+    (films) => {
+      return films.filter((film) =>
+        film.isFavorite);
+    }
+);

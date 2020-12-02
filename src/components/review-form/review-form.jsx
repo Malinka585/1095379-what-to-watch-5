@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const ReviewForm = (props) => {
-  const {onFieldChange, onSubmit} = props;
+  const {onFieldChange, onSubmit, isReviewValid} = props;
 
   return (
     <form action="#"
@@ -16,7 +16,7 @@ const ReviewForm = (props) => {
           <input className="rating__input" id="star-2" type="radio" name="rating" value="2" onChange={onFieldChange}/>
           <label className="rating__label" htmlFor="star-2">Rating 2</label>
 
-          <input className="rating__input" id="star-3" type="radio" name="rating" value="3" onChange={onFieldChange} />
+          <input className="rating__input" id="star-3" type="radio" name="rating" value="3" onChange={onFieldChange}/>
           <label className="rating__label" htmlFor="star-3">Rating 3</label>
 
           <input className="rating__input" id="star-4" type="radio" name="rating" value="4" onChange={onFieldChange}/>
@@ -28,9 +28,16 @@ const ReviewForm = (props) => {
       </div>
 
       <div className="add-review__text">
-        <textarea className="add-review__textarea" name="reviewText" id="review-text" placeholder="Review text" onChange={onFieldChange}></textarea>
+        <textarea
+          className="add-review__textarea"
+          name="reviewText" id="review-text"
+          placeholder="Review text"
+          onChange={onFieldChange}></textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button
+            className="add-review__btn"
+            type="submit"
+            disabled={!isReviewValid}>Post</button>
         </div>
 
       </div>
@@ -41,6 +48,7 @@ const ReviewForm = (props) => {
 ReviewForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onFieldChange: PropTypes.func.isRequired,
+  isReviewValid: PropTypes.bool.isRequired,
 };
 
 export default ReviewForm;

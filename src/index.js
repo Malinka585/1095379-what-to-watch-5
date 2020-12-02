@@ -7,7 +7,7 @@ import {createAPI} from "./services/api";
 import {Provider} from "react-redux";
 import rootReducer from "./store/reducers/root-reducer";
 import {requireAuthorization} from "./store/action";
-import {fetchFilmsList, fetchPromoFilm} from "./store/api-actions";
+import {fetchFilmsList, fetchPromoFilm, checkAuth} from "./store/api-actions";
 import {AuthorizationStatus} from "./const";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {redirect} from "./store/middlewares/redirect";
@@ -28,6 +28,7 @@ const store = createStore(
 Promise.all([
   store.dispatch(fetchFilmsList()),
   store.dispatch(fetchPromoFilm()),
+  store.dispatch(checkAuth()),
 ])
 .then(() => {
   ReactDOM.render(

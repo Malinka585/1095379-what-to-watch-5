@@ -8,9 +8,12 @@ import AddReviewScreen from "../add-review-screen/add-review-screen";
 import PlayerScreen from "../player-screen/player-screen";
 import browserHistory from "../../browser-history";
 import withSelectedFilm from "../../hocs/with-selected-film/with-selected-film";
+import withControlPlayer from "../../hocs/width-control-player/width-control-player";
 import PrivateRoute from "../private-route/private-route";
 
 const MoviePageScreenWrapped = withSelectedFilm(MoviePageScreen);
+const AddReviewScreenWrapped = withSelectedFilm(AddReviewScreen);
+const PlayerScreenWrapped = withSelectedFilm(withControlPlayer(PlayerScreen));
 const App = () => {
 
   return (
@@ -20,7 +23,7 @@ const App = () => {
           path="/"
           render={({history}) => (
             <MainScreen
-              onPlayButtonClick={() => history.push(`/player/:id`)}
+              onPlayButtonClick={(id) => history.push(`/player/${id}`)}
             />
           )}
         />
@@ -50,15 +53,18 @@ const App = () => {
         <PrivateRoute
           exact
           path="/films/:id/review"
-          render={() => (
-            <AddReviewScreen
+          render={({match}) => (
+            <AddReviewScreenWrapped
+              id={Number(match.params.id)}
             />
           )}
         />
         <Route exact
           path="/player/:id"
-          render={({history}) => (
-            <PlayerScreen onExitPlayerButtonClick={() => history.push(`/films/:id`)}
+          render={({history, match}) => (
+            <PlayerScreenWrapped
+              onExitButtonClick={(id) => history.push(`/films/${id}`)}
+              id={Number(match.params.id)}
             />
           )}
         />
