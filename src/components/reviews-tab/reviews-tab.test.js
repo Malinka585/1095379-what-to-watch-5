@@ -23,8 +23,6 @@ const reviews = [{
   date: `2019-05-08T14:13:56.569Z`
 }];
 
-// const noop = () => {};
-
 it(`ReviewsTab is rendered correctly`, () => {
 
   const tree = renderer.create(

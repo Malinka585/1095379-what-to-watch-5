@@ -48,9 +48,6 @@ const filmsDefault = {
 const mockStore = configurateMockStore()(filmsDefault);
 
 
-// const noop = () => {};
-
-
 it(`Render App`, () => {
   const tree = renderer
     .create(

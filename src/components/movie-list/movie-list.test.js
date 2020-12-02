@@ -3,7 +3,6 @@ import renderer from 'react-test-renderer';
 import {BrowserRouter} from "react-router-dom";
 
 import MovieList from './movie-list';
-// jest.mock(`../video-player/video-player.jsx`, () => `VideoPlayer`);
 
 const films = [{
   id: 1,

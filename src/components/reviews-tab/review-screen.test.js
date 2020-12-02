@@ -14,8 +14,6 @@ const review = {
   date: `2019-05-08T14:13:56.569Z`
 };
 
-// const noop = () => {};
-
 it(`ReviewScreen is rendered correctly`, () => {
 
   const tree = renderer.create(

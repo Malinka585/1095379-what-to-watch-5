@@ -3,7 +3,6 @@ import renderer from "react-test-renderer";
 import PropTypes from "prop-types";
 import withVideo from "./with-video";
 
-// const noop = () => {};
 
 const MockComponent = (props) => {
   const {children} = props;
